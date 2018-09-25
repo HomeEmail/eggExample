@@ -1,0 +1,21 @@
+{
+  "name": "egg-example",
+  "version": "1.0.0",
+  "description": "egg example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "egg-bin dev"
+  },
+  "keywords": [
+    "egg"
+  ],
+  "author": "ivan",
+  "license": "ISC",
+  "dependencies": {
+    "egg": "^2.11.2"
+  },
+  "devDependencies": {
+    "egg-bin": "^4.9.0"
+  }
+}
