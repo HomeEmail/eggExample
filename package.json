@@ -13,7 +13,8 @@
   "author": "ivan",
   "license": "ISC",
   "dependencies": {
-    "egg": "^2.11.2"
+    "egg": "^2.11.2",
+    "egg-view-nunjucks": "^2.2.0"
   },
   "devDependencies": {
     "egg-bin": "^4.9.0"
