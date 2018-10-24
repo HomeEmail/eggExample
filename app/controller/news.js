@@ -9,6 +9,11 @@ class NewsController extends Controller{
 				{id:2,title:'this is new 2',url:'/news/2',time:1540309345}
 			]
 		};
+
+		console.log('app.config.env',this.app.config.env);
+		
+		//打印日记
+		this.logger.debug('current user: %j','ivan');
 		await this.ctx.render('news/list.tpl',dataList);
 		
 		//动态数据

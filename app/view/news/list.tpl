@@ -2,8 +2,11 @@
 <html>
 <head>
 	<title>hacker news</title>
+	<link rel="stylesheet" href="/public/css/base.css" />
 </head>
 <body>
+	<h2>test</h2>
+	
 	<ul>
 		{% for item in list %}
 		<li>
@@ -11,5 +14,6 @@
 		</li>
 		{% endfor %}
 	</ul>
+
 </body>
 </html>

@@ -22,6 +22,9 @@ class NewsService extends Service {
                 return this.ctx.curl(url,{dataType:'json'});
             })
         );
+        //打印日记
+        this.ctx.logger.debug('debug info from service');
+        
         return newsList.map(res => res.data);
     }
 }

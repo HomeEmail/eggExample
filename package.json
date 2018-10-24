@@ -4,6 +4,7 @@
   "description": "egg example",
   "main": "index.js",
   "scripts": {
+    "debug": "egg-bin debug",
     "dev": "egg-bin dev --port 7001",
     "test": "egg-bin test",
     "cov": "egg-bin cov", 
