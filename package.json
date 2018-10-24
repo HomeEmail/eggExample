@@ -4,8 +4,10 @@
   "description": "egg example",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "egg-bin dev"
+    "dev": "egg-bin dev --port 7001",
+    "test": "egg-bin test",
+    "cov": "egg-bin cov", 
+    "test1": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "egg"
@@ -18,6 +20,7 @@
     "moment": "^2.22.2"
   },
   "devDependencies": {
-    "egg-bin": "^4.9.0"
+    "egg-bin": "^4.9.0",
+    "egg-mock": "^3.20.1"
   }
 }

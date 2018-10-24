@@ -14,3 +14,15 @@ exports.news = {
 	pageSize:5,
 	serverUrl:'https://hacker-news.firebaseio.com/v0'
 };
+
+//添加中间件 robot
+exports.middleware = [
+	'robot'
+];
+
+//robot's configurations 禁止哪些爬虫访问
+exports.robot = {
+	ua:[
+		/Baiduspider/i
+	]
+};
