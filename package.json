@@ -7,7 +7,7 @@
     "debug": "egg-bin debug",
     "dev": "egg-bin dev --port 7001",
     "test": "egg-bin test",
-    "cov": "egg-bin cov", 
+    "cov": "egg-bin cov",
     "test1": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,7 +18,9 @@
   "dependencies": {
     "egg": "^2.11.2",
     "egg-view-nunjucks": "^2.2.0",
-    "moment": "^2.22.2"
+    "koa-is-json": "^1.0.0",
+    "moment": "^2.22.2",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "egg-bin": "^4.9.0",
