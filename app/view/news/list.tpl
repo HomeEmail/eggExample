@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="/public/css/base.css" />
 </head>
 <body>
-	<h2>test</h2>
+	<h2>test2</h2>
 	
 	<ul>
 		{% for item in list %}
