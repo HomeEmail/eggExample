@@ -16,10 +16,14 @@
   "author": "ivan",
   "license": "ISC",
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "egg": "^2.11.2",
+    "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.2.0",
     "koa-is-json": "^1.0.0",
     "moment": "^2.22.2",
+    "mz": "^2.7.0",
+    "stream-wormhole": "^1.1.0",
     "zlib": "^1.0.5"
   },
   "devDependencies": {

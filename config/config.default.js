@@ -1,5 +1,30 @@
 
-exports.keys = 'sb';//cookie安全字符串
+exports.keys = 'sb';//cookie安全字符串 
+
+exports.session = {
+	key:'sid', //承载 Session 的 Cookie 键值对名字
+	maxAge : 24 * 3600 * 1000, //毫秒 1天 Session 的最大有效时间
+	httpOnly: true,
+    encrypt: true,
+};
+//模板引擎
+exports.view = {
+	defaultViewEngine: 'nunjucks',
+	mapping: {
+		'.tpl': 'nunjucks',
+	},
+};
+
+//请求体配置
+exports.bodyParser = {
+	jsonLimit: '100kb', //application/json
+    formLimit: '100kb', //表单 application/x-www-form-urlencoded
+};
+//上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
+exports.multipart = {
+	mode:'file',//启用 file模式 or stream模式 接收 
+	fileExtensions: [ '.apk','.mov' ], // 增加扩展名的文件支持
+};
 
 //添加view配置
 exports.view = {
