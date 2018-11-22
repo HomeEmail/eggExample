@@ -18,7 +18,7 @@
 	<ul>
 		{% for item in list %}
 		<li>
-			{{item.filename}}-{{item.filepath}}-{{item.mime}}
+			{{item.filename}}-{{item.encoding}}-{{item.mime}}-{{item.toPathName}}
 		</li>
 		{% endfor %}
 	</ul>

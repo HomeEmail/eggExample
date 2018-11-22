@@ -22,8 +22,7 @@ exports.bodyParser = {
 };
 //上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
 exports.multipart = {
-	mode:'file',//启用 file模式 or stream模式 接收 
-	fileExtensions: [ '.apk','.mov' ], // 增加扩展名的文件支持
+	fileExtensions: [ '.apk','.mov','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.dmg','.pdf' ], // 增加扩展名的文件支持
 };
 
 //添加view配置
