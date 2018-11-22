@@ -12,6 +12,9 @@ class UploadController extends Controller{
 			list : [
 			]
 		};
+		//手动执行定时任务
+		await this.app.runSchedule('testSchedule');
+
 		await this.ctx.render('upload.tpl',dataList);
 	}
 	async up(){
