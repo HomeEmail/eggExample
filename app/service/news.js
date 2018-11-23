@@ -5,15 +5,23 @@ class NewsService extends Service {
         //read config
         const { serverUrl,pageSize} = this.config.news;
         //use build-in http client to GET hacker-news api
-        //把返回结果的data字段赋值给变量idList
-        const {data:idList} = await this.ctx.curl(`${serverUrl}/topstories.json`,{
-            data:{
-                orderBy:'"$key"',
-                startAt:`"${pageSize * (page -1)}"`,
-                endAt:`"${pageSize*page-1}"`
-            },
-            dataType:'json'
-        });
+        let result;
+        let idList;
+        try{
+            result = await this.ctx.curl(`${serverUrl}/topstories.json`,{
+                data:{
+                    orderBy:'"$key"',
+                    startAt:`"${pageSize * (page -1)}"`,
+                    endAt:`"${pageSize*page-1}"`
+                },
+                dataType:'json'
+            });
+            //把返回结果的data字段赋值给变量idList
+           // const {data:idList} = result;
+           idList=result.data;
+        }catch(err){
+            console.log(err.message);
+        }
 
         //parallel get detail
         const newsList = await Promise.all(

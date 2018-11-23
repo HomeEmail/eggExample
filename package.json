@@ -8,6 +8,8 @@
     "dev": "egg-bin dev --port 7001",
     "test": "egg-bin test",
     "cov": "egg-bin cov",
+    "start": "egg-scripts start --port=80 --daemon",
+    "stop": "egg-scripts stop",
     "test1": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,10 +20,13 @@
   "dependencies": {
     "await-stream-ready": "^1.0.1",
     "egg": "^2.11.2",
+    "egg-mysql": "^3.0.0",
+    "egg-scripts": "^2.10.0",
     "egg-validate": "^2.0.2",
     "egg-view-nunjucks": "^2.2.0",
     "koa-is-json": "^1.0.0",
     "moment": "^2.22.2",
+    "ms": "^2.1.1",
     "mz": "^2.7.0",
     "stream-wormhole": "^1.1.0",
     "zlib": "^1.0.5"

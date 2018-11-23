@@ -21,6 +21,27 @@ module.exports = appInfo => {
 		multipart : { //上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
 			fileExtensions: [ '.apk','.mov','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.dmg','.pdf' ], // 增加扩展名的文件支持
 		},
+		mysql : {
+			clients:{
+				// clientId, 获取client实例，需要通过 app.mysql.get('clientId') 获取
+				db1:{
+					host:'localhost',
+					port:'3306',
+					user:'root',
+					password:'123456',
+					database:'test',
+				}
+			},
+			// 所有数据库配置的默认值
+			default:{
+				
+			},
+			//是否加载到 app 上，默认开启
+			app:true,
+			//是否加载到 agent 上，默认关闭
+			agent:false,
+		},
+
 		middleware : [ //在配置众中引入中间件,添加如下中间件，数组顺序即为中间件的加载顺序
 			'robot',
 			'gzip'
