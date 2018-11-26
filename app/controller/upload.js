@@ -26,7 +26,10 @@ class UploadController extends Controller{
 			list : [
 			]
 		};
-		let uploadBasePath=path.resolve(__dirname,'../../upload/');
+		//let uploadBasePath=path.resolve(__dirname,'../../upload/');
+		console.log('---this.config.uploadBasePath---'+this.config.uploadBasePath);
+		let uploadBasePath=path.join(this.config.uploadBasePath,'upload');
+		console.log(uploadBasePath);
 		let toPathName='';//目标路径
 		let part;
 		while((part = await parts()) != null){

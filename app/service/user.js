@@ -50,6 +50,13 @@ class UserService extends Service {
     	});
     	return result;
     }
+    async query(body){ //直接执行 sql 语句
+    	const mysqlClient = this.app.mysql.get('db1'); 
+    	//const postId = 1;
+		//const results = await mysqlClient.query('update posts set hits = (hits + ?) where id = ?', [1, postId]);
+		//=> update posts set hits = (hits + 1) where id = 1;
+
+    }
     async update(body){
     	const mysqlClient = this.app.mysql.get('db1'); 
     	const row = {
@@ -99,6 +106,31 @@ class UserService extends Service {
 	     	};
 
      	}
+    }
+    async useTransaction(){ //事务使用
+    	const mysqlClient = this.app.mysql.get('db1'); 
+
+    	//手动控制
+     	// const conn = await mysqlClient.beginTransaction(); // 初始化事务
+		// try {
+		// 	await conn.insert(table, row1);  // 第一步操作
+		// 	await conn.update(table, row2);  // 第二步操作
+		// 	await conn.commit(); // 提交事务
+		// } catch (err) {
+		// 	// error, rollback
+		// 	await conn.rollback(); // 一定记得捕获异常后回滚事务！！
+		// 	throw err;
+		// }
+
+		//自动控制
+		// const result = await mysqlClient.beginTransactionScope(async conn => {
+		// 	// don't commit or rollback by yourself
+		// 	await conn.insert(table, row1);
+		// 	await conn.update(table, row2);
+		// 	return { success: true };
+		// }, this.ctx); // ctx 是当前请求的上下文，如果是在 service 文件中，可以从 `this.ctx` 获取到
+		// // if error throw on scope, will auto rollback
+
     }
 
 
