@@ -19,11 +19,15 @@ npm run test
 npm run cov
 
 库:
+https://github.com/eggjs/
+
 mz是个封装nodejs自带api，可以使用promise或者async特性写代码
 stream-wormhole	将 stream 流消耗掉
 await-stream-ready	文件读写流 ready 库，能够使用 await
 Moment 是一个日期时间处理库 a Parse, validate, manipulate, and display dates and times in JavaScript.
 ms 时间转换成毫秒 Tiny milisecond conversion utility https://npmjs.com/ms
+egg-session-redis 就提供了将 Session 存储到 redis 中的能力，在应用层，我们只需要引入 egg-redis 和 egg-session-redis 插件
+egg-validate 验证规则 https://github.com/node-modules/parameter
 
 应用部署
 构建
