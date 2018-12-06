@@ -69,7 +69,7 @@ module.exports = appInfo => {
 			serverUrl:'https://hacker-news.firebaseio.com/v0'
 		},
 		//上传文件路径前缀
-		uploadBasePath:appInfo.root,
+		uploadBasePath:path.join(appInfo.root,'upload'),
 	};
 };
 

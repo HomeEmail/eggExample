@@ -28,7 +28,7 @@ class UploadController extends Controller{
 		};
 		//let uploadBasePath=path.resolve(__dirname,'../../upload/');
 		console.log('---this.config.uploadBasePath---'+this.config.uploadBasePath);
-		let uploadBasePath=path.join(this.config.uploadBasePath,'upload');
+		let uploadBasePath=this.config.uploadBasePath;
 		console.log(uploadBasePath);
 		let toPathName='';//目标路径
 		let part;
