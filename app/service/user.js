@@ -31,13 +31,22 @@ class UserService extends Service {
     }
     async getOne(id = 1){
     	const mysqlClient = this.app.mysql.get('db1'); 
-    	const result = await mysqlClient.get('user',{id:id});
-    	return result;
+		const result = await mysqlClient.get('user',{id:id});
+		console.log('------getOne-----',result);
+    	return {
+			code:1,
+			data:result,
+			msg:'获取成功'
+		};
     }
     async getAll(){
     	const mysqlClient = this.app.mysql.get('db1'); 
     	const result = await mysqlClient.select('user');
-    	return result;
+    	return {
+			code:1,
+			data:result,
+			msg:'获取成功'
+		};
     }
     async getByWhere(body){
     	const mysqlClient = this.app.mysql.get('db1'); 
@@ -48,7 +57,11 @@ class UserService extends Service {
     		limit:10,//返回数据量
     		offset:0,//数据偏移量
     	});
-    	return result;
+    	return {
+			code:1,
+			data:result,
+			msg:'获取成功'
+		};
     }
     async query(body){ //直接执行 sql 语句
     	const mysqlClient = this.app.mysql.get('db1'); 
