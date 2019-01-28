@@ -46,6 +46,18 @@ class UserController extends Controller {
 		this.ctx.body = result;
 
 	}
+	async login(){
+		const ctx=this.ctx;
+
+		ctx.session.userinfo={name:'小明',id:22,roleId:32};
+
+		ctx.body=ctx.session.userinfo;
+	}
+	async logout(){
+		const ctx=this.ctx;
+		ctx.session=null;
+		ctx.body='你已退出登陆';
+	}
 
 }
 

@@ -44,7 +44,8 @@ module.exports = appInfo => {
 
 		middleware : [ //在配置众中引入中间件,添加如下中间件，数组顺序即为中间件的加载顺序
 			'robot',
-			'gzip'
+			'gzip',
+			'auth',
 		],
 		//框架和插件中使用中间件样例
 		//app.config.coreMiddleware.unshift('gzip');
@@ -52,16 +53,29 @@ module.exports = appInfo => {
 		// const gzip = app.middleware.gzip({ threshold: 1024 });
 		// app.router.get('/needgzip', gzip, app.controller.handler);
 
+		// 无论是应用层加载的中间件还是框架自带中间件，都支持几个通用的配置项：
+		// enable：控制中间件是否开启。
+		// match：设置只有符合某些规则的请求才会经过这个中间件。
+		// ignore：设置符合某些规则的请求不经过这个中间件。
+
 		//robot's configurations 禁止哪些爬虫访问
 		robot : {
+			enable:false,//是否启用
 			ua:[
 				/Baiduspider/i
 			]
 		},
 		//gzip 中间件配置
 		gzip : {
+			enable:false,//是否启用
 			threshold:512, // 小于 0.5k 的响应体不压缩
 		},
+		auth : {
+			enable:true,//是否启用
+			noneedLoginUrls : ['/','/login','/logout','/captcha'],
+		},
+
+
 
 		//添加 news 的配置项
 		news : {

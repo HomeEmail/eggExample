@@ -8,7 +8,7 @@ class UserService extends Service {
      	const result = await mysqlClient.insert('user',{
      		name:'user1',
      		username:'user'+Date.now(),
-     		password: new Literal(`password("${psw}")`),
+     		password: new Literal(`SHA("${psw}")`),
      		age:23,
      		update_at:mysqlClient.literals.now,
      		create_at:mysqlClient.literals.now
