@@ -13,3 +13,12 @@ exports.mysql = {
 	enable:true,
 	package:'egg-mysql',
 };
+
+exports.redis = {
+  enable: false,
+  package: 'egg-redis',
+};
+exports.sessionRedis = {
+  enable: false,
+  package: 'egg-session-redis',
+};

@@ -42,6 +42,57 @@ module.exports = appInfo => {
 			agent:false,
 		},
 
+		redis : {
+			client: { //单例
+			    port: 6379,          // Redis port
+			    host: '127.0.0.1',   // Redis host
+			    password: 'auth',
+			    db: 0,
+		  	},
+		  	/*clients: { //多例
+				foo: {                 // instanceName. See below
+					port: 6379,          // Redis port
+					host: '127.0.0.1',   // Redis host
+					password: 'auth',
+					db: 0,
+				},
+				bar: {
+					port: 6379,
+					host: '127.0.0.1',
+					password: 'auth',
+					db: 1,
+				},
+			},
+			client: { //哨兵模式
+				sentinels: [{          // Sentinel instances
+					port: 26379,         // Sentinel port  
+					host: '127.0.0.1',   // Sentinel host  
+				}],
+				name: 'mymaster',      // Master name
+				password: 'auth',
+				db: 0
+			},
+			client: { //集群模式
+				cluster: true,
+				nodes: [
+					{
+						host: '127.0.0.1',
+						port: '6379',
+						family: 'user',
+						password: 'password',
+						db: 'db',
+					}, 
+					{
+						host: '127.0.0.1',
+						port: '6380',
+						family: 'user',
+						password: 'password',
+						db: 'db',
+					}
+				]
+			},*/
+		},
+
 		middleware : [ //在配置众中引入中间件,添加如下中间件，数组顺序即为中间件的加载顺序
 			'robot',
 			'gzip',
