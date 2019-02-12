@@ -19,4 +19,7 @@ module.exports = app => {
 	router.get('/user/update',controller.user.update);
 	router.get('/user/del',controller.user.del);
 
+	//这里可以引入其他路由集合
+	require('./router/panda/router')(app);
+
 };

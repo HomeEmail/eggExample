@@ -8,6 +8,11 @@ module.exports = appInfo => {
 			httpOnly: true,
 		    encrypt: true,
 		},
+		security : { //框架中内置了安全插件 egg-security，提供了一些默认的安全实践，并且框架的安全插件是默认开启的，如果需要关闭其中一些安全防范，直接设置该项的 enable 属性为 false 即可
+			csrf : {
+				enable: false,
+			},
+		},
 		view : { //模板引擎
 			defaultViewEngine: 'nunjucks',
 			mapping: {
@@ -29,7 +34,7 @@ module.exports = appInfo => {
 					port:'3306',
 					user:'root',
 					password:'123456',
-					database:'test',
+					database:'panda',
 				}
 			},
 			// 所有数据库配置的默认值
@@ -123,7 +128,7 @@ module.exports = appInfo => {
 		},
 		auth : {
 			enable:true,//是否启用
-			noneedLoginUrls : ['/','/login','/logout','/captcha'],
+			noneedLoginUrls : ['/','/login','/logout','/captcha','/system/verificationCode/getCode.utvgo','/system/user/login.utvgo'],
 		},
 
 
@@ -133,8 +138,16 @@ module.exports = appInfo => {
 			pageSize:5,
 			serverUrl:'https://hacker-news.firebaseio.com/v0'
 		},
-		//上传文件路径前缀
+		//后端上传文件路径前缀
 		uploadBasePath:path.join(appInfo.root,'upload'),
+		//前端读取图片路径前缀
+		imageProfix:'http://172.16.146.56:81/panda/uploadFile/image/',
+		//前端读取音频路径前缀
+		audioProfix:'http://172.16.146.56:81/panda/uploadFile/audio/',
+		//前端读取视频路径前缀
+		videoProfix:'http://172.16.146.56:81/panda/uploadFile/video/',
+		//前端读取文件路径前缀
+		fileProfix:'http://172.16.146.56:81/panda/uploadFile/file/',
 	};
 };
 

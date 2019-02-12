@@ -10,7 +10,20 @@ module.exports = (options,app) => {
         ctx.locals.csrf = ctx.csrf; //locals==state
         ctx.locals.prevPage = ctx.request.headers['referer'];  //获取上一页的url
 
+        //let Authorization = ctx.request.headers['Authorization'];//获取自己定义的token验证,登陆时生成token；这里获取到的值是 'Bearer ' + token;
+
         if(ctx.session.userinfo){
+            //如果需要验证自己定义的token在这里验证下
+            // if(ctx.session.userinfo.token==Authorization.split(' ')[1]){//通过
+            //     ctx.locals.userinfo = ctx.session.userinfo;
+            //     await next();
+            // }else{ //不通过
+            //     ctx.status = 401;
+            //     ctx.body = '你的当前状态已退出登陆,请重新登陆！';
+            //     //ctx.redirect('/admin/login');
+            // }
+
+
             ctx.locals.userinfo = ctx.session.userinfo;
             await next();
 
