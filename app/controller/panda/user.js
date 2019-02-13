@@ -13,9 +13,10 @@ class UserController extends Controller {
                 required: true,//默认就是true
             },
             passwd: {
-                type: 'string',
+                type: 'password',
                 required: true,//默认就是true
-                //compare: 're-password',
+                min:6,//密码长度最少6位
+                //compare: 're-password',//和此参数对比是否相同
             },
             verificationCode:{
                 type: 'string',
@@ -24,7 +25,13 @@ class UserController extends Controller {
         };
         // 校验 `ctx.request.body` 是否符合我们预期的格式
         // 如果参数校验未通过，将会抛出一个 status = 422 的异常
-        ctx.validate(createRule, param);
+        try{
+            ctx.validate(createRule, param);
+        }catch(err){
+            ctx.logger.warn(err.errors);
+            this.failure('参数有误！');
+            return 0;
+        }
 
         if(param.verificationCode.toLowerCase()!=ctx.session.captcha.toLowerCase()){
             this.failure('验证码错误！');
@@ -45,11 +52,14 @@ class UserController extends Controller {
             return 0;
         }
 
+        let sysRoleList = await ctx.service.panda.user.getAuthority(result.pkId);//获取此用户的角色权限列表
+
     
         let data=Object.assign(
             {
                 verificationCode:ctx.session.captcha,
                 token:common.uuidv1(),
+                sysRoleList:sysRoleList,
             },
             result
         );
