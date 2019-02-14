@@ -28,7 +28,7 @@ class UserController extends Controller {
         try{
             ctx.validate(createRule, param);
         }catch(err){
-            ctx.logger.warn(err.errors);
+            ctx.logger.warn(err.message);
             this.failure('参数有误！');
             return 0;
         }

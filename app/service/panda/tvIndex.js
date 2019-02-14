@@ -9,7 +9,7 @@ class tvIndexService extends Service {
 
     async getPageDatas(typeId){
         const mysqlClient = this.app.mysql.get('db1');
-        const results = await mysqlClient.query('SELECT t.* from (SELECT href,imgUrl,`name`,number,typeId,vodId FROM utvgo_tv_index_record WHERE typeId=? AND `status`=1 AND NOW()>ableTime AND NOW()<disableTime GROUP BY number ORDER BY priority DESC) as t ORDER BY t.number ASC',[typeId]);//状态（0待审核，1审核通过，2审核不通过，3已下架）
+        const results = await mysqlClient.query('SELECT t.* from (SELECT temp.href,temp.imgUrl,temp.`name`,temp.number,temp.typeId,temp.vodId FROM (SELECT href,imgUrl,`name`,number,typeId,vodId FROM utvgo_tv_index_record WHERE typeId=? AND `status`=1 AND NOW()>ableTime AND NOW()<disableTime ORDER BY priority DESC,pkId DESC) as temp GROUP BY temp.number) as t ORDER BY t.number ASC;',[typeId]);//状态（0待审核，1审核通过，2审核不通过，3已下架）
         return results || [];
     }
 
@@ -44,6 +44,60 @@ class tvIndexService extends Service {
      	}else{
 	     	return null;
      	}
+    }
+    async updatePageRecord(pkId,obj){ //更新成功返回成功记录数，否则返回null
+        const mysqlClient = this.app.mysql.get('db1'); 
+        const ctx=this.ctx;
+        const userName=ctx.session.userinfo.loginName;
+    	const row = {
+            ...obj,
+            editeBy:userName,
+    	};
+    	const options = {
+    		where:{
+    			pkId:pkId
+    		}
+    	};
+
+    	const result = await mysqlClient.update('utvgo_tv_index_record',row,options);
+    	//console.log(result);
+     	const updateSuccess = result.affectedRows >= 1;
+     	if(updateSuccess){
+     		return result.affectedRows;
+     	}else{
+	     	return null;
+     	}
+    }
+    async updatePageRecordStatus(pkId,status){ //更新成功返回成功记录数，否则返回null
+        const mysqlClient = this.app.mysql.get('db1'); 
+        const ctx=this.ctx;
+        const userName=ctx.session.userinfo.loginName;
+    	const row = {
+            status:status,
+            auditBy:userName,
+    	};
+    	const options = {
+    		where:{
+    			pkId:pkId
+    		}
+    	};
+
+    	const result = await mysqlClient.update('utvgo_tv_index_record',row,options);
+    	//console.log(result);
+     	const updateSuccess = result.affectedRows >= 1;
+     	if(updateSuccess){
+     		return result.affectedRows;
+     	}else{
+	     	return null;
+     	}
+    }
+    async updatePageRecordStatusByBatch(pkIds,status){ //批量更新状态 pkIds是数组 
+        //UPDATE `utvgo_tv_index_record` SET `status` = '3', `auditBy` = 'lcb' WHERE `pkId` in ('108');
+        const ctx=this.ctx;
+        const userName=ctx.session.userinfo.loginName;
+        const mysqlClient = this.app.mysql.get('db1');
+        const result = await mysqlClient.query('UPDATE `utvgo_tv_index_record` SET `status` = ?, `auditBy` = ? WHERE `pkId` in (?)',[status,userName,pkIds]);
+        return !!result&&!!result.affectedRows ? result.affectedRows : null; //更新成功返回成功记录数，否则返回null
     }
 
 
