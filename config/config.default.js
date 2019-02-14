@@ -25,6 +25,7 @@ module.exports = appInfo => {
 		},
 		multipart : { //上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
 			fileExtensions: [ '.apk','.mov','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.dmg','.pdf' ], // 增加扩展名的文件支持
+			mode:'stream',
 		},
 		mysql : {
 			clients:{

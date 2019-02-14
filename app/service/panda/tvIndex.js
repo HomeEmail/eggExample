@@ -24,6 +24,27 @@ class tvIndexService extends Service {
         const results = await mysqlClient.query('SELECT *,pkId as id FROM utvgo_tv_index_record WHERE pkId<=(SELECT pkId FROM utvgo_tv_index_record WHERE typeId=? AND number=? AND `status`!=3 ORDER BY pkId DESC LIMIT ?,1) and typeId=? AND number=? AND `status`!=3 ORDER BY priority DESC,pkId DESC LIMIT ?',[typeId,number,offset,typeId,number,pageSize]);
         return results||[];
     }
+    async insertPageRecord(obj){ //插入成功返回插入的主键id，否则返回null
+        const mysqlClient = this.app.mysql.get('db1');
+        const ctx=this.ctx;
+        const userName=ctx.session.userinfo.loginName;
+        const result = await mysqlClient.insert('utvgo_tv_index_record',{
+            ...obj,
+            status:0,
+            createTime:mysqlClient.literals.now,
+            updateTime:mysqlClient.literals.now,
+            auditeTime:'',
+            createBy:userName,
+            editeBy:userName,
+            auditBy:'',
+        });  
+        const insertSuccess = result.affectedRows === 1;
+     	if(insertSuccess){
+     		return result.insertId;
+     	}else{
+	     	return null;
+     	}
+    }
 
 
 }

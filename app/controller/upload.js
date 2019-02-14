@@ -42,7 +42,12 @@ class UploadController extends Controller{
 			}else{
 				if(!part.filename){
 					// 这时是用户没有选择文件就点击了上传(part 是 file stream，但是 part.filename 为空)
-          			// 需要做出处理，例如给出错误提示消息
+					// 需要做出处理且必须销毁stream，否则导致程序无响应，例如给出错误提示消息
+					try{
+						await sendToWormhole(part);//销毁stream
+					}catch(err){
+						ctx.logger.error(err.errors);
+					}
 					//return;
 				}else{
 					console.log('--------------');
@@ -77,8 +82,10 @@ class UploadController extends Controller{
 						await awaitStreamReady.write(part.pipe(writeStream));
 
 					}catch(err){
-						await sendToWormhole(part);
-						throw err;
+						//throw err;
+						ctx.logger.error(err.errors);
+					}finally{
+						await sendToWormhole(part);//销毁stream
 					}
 				}
 			}

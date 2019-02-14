@@ -32,6 +32,10 @@ class UserController extends Controller {
             this.failure('参数有误！');
             return 0;
         }
+        if(!!!ctx.session.captcha){
+            this.failure('无验证码，请先生成验证码!');
+            return 0;
+        }
 
         if(param.verificationCode.toLowerCase()!=ctx.session.captcha.toLowerCase()){
             this.failure('验证码错误！');
@@ -63,7 +67,7 @@ class UserController extends Controller {
             },
             result
         );
-		ctx.session.userinfo=data;
+		ctx.session.userinfo={loginName:data.loginName,token:data.token}; //只保存必要的信息，太多信息的话如果不采用外部存储session就会丢失部分session信息
 
 		this.success({data:data});
 	}
