@@ -72,9 +72,14 @@ class UserController extends Controller {
 		this.success({data:data});
 	}
 	async logout(){
-		const ctx=this.ctx;
-		ctx.session=null;
-		ctx.body='你已退出登陆';
+        const ctx=this.ctx;
+        try{
+            ctx.session=null;
+            this.success();
+        }catch(err){
+            this.failure(err.message);
+        }
+        
 	}
 
 }

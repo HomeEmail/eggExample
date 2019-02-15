@@ -49,12 +49,12 @@ module.exports = appInfo => {
 		},
 
 		redis : {
-			client: { //单例
-			    port: 6379,          // Redis port
-			    host: '127.0.0.1',   // Redis host
-			    password: 'auth',
-			    db: 0,
-		  	},
+			// client: { //单例
+			//     port: 6379,          // Redis port
+			//     host: '127.0.0.1',   // Redis host
+			//     password: 'auth',
+			//     db: 0,
+		  	// },
 		  	/*clients: { //多例
 				foo: {                 // instanceName. See below
 					port: 6379,          // Redis port
@@ -77,26 +77,33 @@ module.exports = appInfo => {
 				name: 'mymaster',      // Master name
 				password: 'auth',
 				db: 0
-			},
+			},*/
 			client: { //集群模式
 				cluster: true,
 				nodes: [
 					{
-						host: '127.0.0.1',
-						port: '6379',
+						host: '172.16.146.32',
+						port: '7001',
 						family: 'user',
-						password: 'password',
-						db: 'db',
+						password: '',
+						db: 'db0',
 					}, 
 					{
-						host: '127.0.0.1',
-						port: '6380',
+						host: '172.16.146.32',
+						port: '7002',
 						family: 'user',
-						password: 'password',
-						db: 'db',
+						password: '',
+						db: 'db0',
+					}, 
+					{
+						host: '172.16.146.32',
+						port: '7003',
+						family: 'user',
+						password: '',
+						db: 'db0',
 					}
 				]
-			},*/
+			},
 		},
 
 		middleware : [ //在配置众中引入中间件,添加如下中间件，数组顺序即为中间件的加载顺序
@@ -134,6 +141,12 @@ module.exports = appInfo => {
 
 
 
+		customCache:{ //自己定义的缓存中间件配置 包含clearCache.js saveAndReadCache.js 
+			enable:true,//是否启用 总开关
+			type:'redis',//local or redis
+			outTime:10*60,//缓存多久单位秒,优先级小于路由里配置的outTime，如个别路由缓存时间不一样请在路由里设置
+			prekey:'panda_',//redis key的前缀
+		},
 		//添加 news 的配置项
 		news : {
 			pageSize:5,

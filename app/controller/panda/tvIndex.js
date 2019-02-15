@@ -280,6 +280,7 @@ class tvIndexController extends Controller {
 
     async auditePageRecord(){ //审核
         let resultNum=await this.updatePageRecordStatus();
+        //console.log('auditePageRecord end------');
         //在这里返回数据
         if(!!resultNum){
             this.success();

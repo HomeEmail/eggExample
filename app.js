@@ -1,6 +1,7 @@
 
 module.exports = app => {
     app.beforeStart(async () => {
+        app.cache={};//全局缓存对象 样例：{'/url/1':JSON.stringify({data:'here is data',disableTime:'2018-02-05 13:00:00'})}
         console.log('app beforeStart');
         // 应用会等待这个函数执行完成才启动
         // app.cities = await app.curl('http://example.com/city.json', {
