@@ -6,9 +6,12 @@ module.exports = (options,app) => {
         // 2.只有登录以后才可以访问后台管理系统
         var pathname = url.parse(ctx.request.url).pathname;
         console.log('auth.js pathname:',pathname);
+
         //csrf
         ctx.locals.csrf = ctx.csrf; //locals==state
         ctx.locals.prevPage = ctx.request.headers['referer'];  //获取上一页的url
+
+        let projectRunName=!!ctx.app.config.projectRunName?'/'+ctx.app.config.projectRunName:'';
 
         //let Authorization = ctx.request.headers['Authorization'];//获取自己定义的token验证,登陆时生成token；这里获取到的值是 'Bearer ' + token;
 
@@ -38,12 +41,12 @@ module.exports = (options,app) => {
         }else{
             // 排除不需要做杼判断的页面    admin/verify?mt=0.7755167188853835
             let checkUrls=options.noneedLoginUrls||[];
-            let isnoneed=checkUrls.some((item)=>{if(item==pathname) return true;});
+            let isnoneed=checkUrls.some((item)=>{if((projectRunName+item)==pathname||(projectRunName+item+'/')==pathname) return true;});
             if(isnoneed){
                 await next();
             }else{
                 ctx.status = 401;
-                ctx.body = '你的当前状态已退出登陆,请重新登陆！';
+                ctx.body = '你的当前状态已退出登陆,请重新登陆！或者请求地址不正确，请检查！';
                 //ctx.redirect('/admin/login');
             }
         }

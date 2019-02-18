@@ -140,7 +140,7 @@ module.exports = appInfo => {
 		},
 
 
-
+		projectRunName:'',//panda-cms-node
 		customCache:{ //自己定义的缓存中间件配置 包含clearCache.js saveAndReadCache.js 
 			enable:true,//是否启用 总开关
 			type:'redis',//local or redis

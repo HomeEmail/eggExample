@@ -45,3 +45,13 @@ $ tar -zcvf ../release.tgz .
 也可以直接通过 ps -eo "pid,command" | grep -- "--title=egg-server" 来找到 master 进程，并 kill 掉，无需 kill -9。
 
 默认是按cpu核数来启动服务的，项目配置文件默认在/config/config.default.js里
+
+默认输出日记在登陆系统的当前用户目录下的logs文件夹里
+所有日志文件默认都放在 ${appInfo.root}/logs/${appInfo.name} 路径下，例如 /home/admin/logs/example-app。
+在本地开发环境 (env: local) 和单元测试环境 (env: unittest)，为了避免冲突以及集中管理，日志会打印在项目目录下的 logs 目录，例如 /path/to/example-app/logs/example-app。
+如果想自定义日志路径：
+
+// config/config.${env}.js
+exports.logger = {
+  dir: '/path/to/your/custom/log/dir',
+};

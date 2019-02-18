@@ -7,12 +7,12 @@ class CaptchaController extends Controller {
 		
 		const c =svgCaptcha.create({ //普通验证码
 			size:4,
-			noise:2,
+			noise:3,
 			color:true,
 			background:'#dddddd',
 			width:80,
 			height:40,
-			fontSize:30
+			fontSize:36
 		}); //返回 {data: '<svg.../svg>', text: 'abcd'}
 
 		// const cc=svgCaptcha.createMathExpr({ //算术验证码
