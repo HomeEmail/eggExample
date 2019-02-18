@@ -29,11 +29,18 @@ ms 时间转换成毫秒 Tiny milisecond conversion utility https://npmjs.com/ms
 egg-session-redis 就提供了将 Session 存储到 redis 中的能力，在应用层，我们只需要引入 egg-redis 和 egg-session-redis 插件
 egg-validate 验证规则 https://github.com/node-modules/parameter
 
+上线部署步骤：
+环境部署
+Node 版本为 >= 8.0.0
+
 应用部署
-构建
+1.构建
 $ cd baseDir
 $ npm install --production
 $ tar -zcvf ../release.tgz .
 
-部署
-Node 版本为 >= 8.0.0
+2.执行
+复制压缩包到部署目录解压压缩包
+在部署目录，终端执行 npm start 启动应用，npm stop 停止应用
+也可以直接通过 ps -eo "pid,command" | grep -- "--title=egg-server" 来找到 master 进程，并 kill 掉，无需 kill -9。
+
