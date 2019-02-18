@@ -44,3 +44,4 @@ $ tar -zcvf ../release.tgz .
 在部署目录，终端执行 npm start 启动应用，npm stop 停止应用
 也可以直接通过 ps -eo "pid,command" | grep -- "--title=egg-server" 来找到 master 进程，并 kill 掉，无需 kill -9。
 
+默认是按cpu核数来启动服务的，项目配置文件默认在/config/config.default.js里
