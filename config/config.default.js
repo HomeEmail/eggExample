@@ -1,5 +1,6 @@
 const path = require('path');
 module.exports = appInfo => {
+	console.log('config appInfo.baseDir:',appInfo.baseDir);
 	return {
 		keys:'sb',//cookie安全字符串 
 		session : {
@@ -26,6 +27,9 @@ module.exports = appInfo => {
 		multipart : { //上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
 			fileExtensions: [ '.apk','.mov','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.dmg','.pdf' ], // 增加扩展名的文件支持
 			mode:'stream',
+		},
+		logger : { //日记输出路径配置
+			dir: path.join(appInfo.baseDir, 'logs'),
 		},
 		mysql : {
 			clients:{
@@ -140,7 +144,7 @@ module.exports = appInfo => {
 		},
 
 
-		projectRunName:'',//panda-cms-node
+		projectRunName:'panda-cms-node',//panda-cms-node
 		customCache:{ //自己定义的缓存中间件配置 包含clearCache.js saveAndReadCache.js 
 			enable:true,//是否启用 总开关
 			type:'redis',//local or redis
@@ -153,7 +157,7 @@ module.exports = appInfo => {
 			serverUrl:'https://hacker-news.firebaseio.com/v0'
 		},
 		//后端上传文件路径前缀
-		uploadBasePath:path.join(appInfo.root,'upload'),
+		uploadBasePath:path.join(appInfo.baseDir,'upload'),
 		//前端读取图片路径前缀
 		imageProfix:'http://172.16.146.56:81/panda/uploadFile/image/',
 		//前端读取音频路径前缀
