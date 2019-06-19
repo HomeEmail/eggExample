@@ -55,3 +55,11 @@ $ tar -zcvf ../release.tgz .
 exports.logger = {
   dir: '/path/to/your/custom/log/dir',
 };
+
+//安装依赖提示这个错误：if not defined npm_config_node_gyp
+解决：
+找到node-gyp.js路径
+配置路径，比如：set npm_config_node_gyp=C:\Program Files\nodejs\node_modules\npm\node_modules\node-gyp\lib\node-gyp.js
+
+yarn 安装依赖不了，加上 --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
+
