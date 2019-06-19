@@ -7,7 +7,7 @@ module.exports = appInfo => {
 			key:'sid', //承载 Session 的 Cookie 键值对名字
 			maxAge : 24 * 3600 * 1000, //毫秒 1天 Session 的最大有效时间
 			httpOnly: true,
-		    encrypt: true,
+		  encrypt: true,
 		},
 		security : { //框架中内置了安全插件 egg-security，提供了一些默认的安全实践，并且框架的安全插件是默认开启的，如果需要关闭其中一些安全防范，直接设置该项的 enable 属性为 false 即可
 			csrf : {
@@ -22,7 +22,7 @@ module.exports = appInfo => {
 		},
 		bodyParser : { //请求体配置
 			jsonLimit: '100kb', //application/json
-		    formLimit: '100kb', //表单 application/x-www-form-urlencoded
+		  formLimit: '100kb', //表单 application/x-www-form-urlencoded
 		},
 		multipart : { //上传文件请求体配置 //浏览器上都是通过 Multipart/form-data 格式发送文件
 			fileExtensions: [ '.apk','.mov','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.dmg','.pdf' ], // 增加扩展名的文件支持
@@ -39,7 +39,7 @@ module.exports = appInfo => {
 					port:'3306',
 					user:'root',
 					password:'123456',
-					database:'panda',
+					database:'image_tool',
 				}
 			},
 			// 所有数据库配置的默认值
@@ -82,32 +82,32 @@ module.exports = appInfo => {
 				password: 'auth',
 				db: 0
 			},*/
-			client: { //集群模式
-				cluster: true,
-				nodes: [
-					{
-						host: '172.16.146.32',
-						port: '7001',
-						family: 'user',
-						password: '',
-						db: 'db0',
-					}, 
-					{
-						host: '172.16.146.32',
-						port: '7002',
-						family: 'user',
-						password: '',
-						db: 'db0',
-					}, 
-					{
-						host: '172.16.146.32',
-						port: '7003',
-						family: 'user',
-						password: '',
-						db: 'db0',
-					}
-				]
-			},
+			// client: { //集群模式
+			// 	cluster: true,
+			// 	nodes: [
+			// 		{
+			// 			host: '172.16.146.32',
+			// 			port: '7001',
+			// 			family: 'user',
+			// 			password: '',
+			// 			db: 'db0',
+			// 		}, 
+			// 		{
+			// 			host: '172.16.146.32',
+			// 			port: '7002',
+			// 			family: 'user',
+			// 			password: '',
+			// 			db: 'db0',
+			// 		}, 
+			// 		{
+			// 			host: '172.16.146.32',
+			// 			port: '7003',
+			// 			family: 'user',
+			// 			password: '',
+			// 			db: 'db0',
+			// 		}
+			// 	]
+			// },
 		},
 
 		middleware : [ //在配置众中引入中间件,添加如下中间件，数组顺序即为中间件的加载顺序
@@ -139,17 +139,18 @@ module.exports = appInfo => {
 			threshold:512, // 小于 0.5k 的响应体不压缩
 		},
 		auth : {
-			enable:true,//是否启用
-			noneedLoginUrls : ['/','/login','/logout','/captcha','/system/verificationCode/getCode.utvgo','/system/user/login.utvgo'],
+			enable:false,//是否启用
+			noneedLoginUrls:[],
+			//noneedLoginUrls : ['/','/login','/logout','/captcha','/system/verificationCode/getCode.utvgo','/system/user/login.utvgo'],
 		},
 
 
-		projectRunName:'panda-cms-node',//panda-cms-node
+		projectRunName:'imageTool',//panda-cms-node
 		customCache:{ //自己定义的缓存中间件配置 包含clearCache.js saveAndReadCache.js 
 			enable:true,//是否启用 总开关
-			type:'redis',//local or redis
+			type:'local',//local or redis
 			outTime:10*60,//缓存多久单位秒,优先级小于路由里配置的outTime，如个别路由缓存时间不一样请在路由里设置
-			prekey:'panda_',//redis key的前缀
+			prekey:'image_tool_',//redis key的前缀
 		},
 		//添加 news 的配置项
 		news : {

@@ -29,6 +29,7 @@
     "ejs": "^2.6.1",
     "ejsexcel": "^3.5.3",
     "ftp": "^0.3.10",
+    "get-image-colors": "^2.0.0",
     "hashids": "^1.2.2",
     "iconv-lite": "^0.4.24",
     "jsftp": "^2.1.3",
