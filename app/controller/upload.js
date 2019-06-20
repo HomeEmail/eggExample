@@ -10,10 +10,11 @@ class UploadController extends Controller{
 		//数据
 		const dataList = {
 			list : [
-			]
+			],
+			projectRunName:this.config.projectRunName,
 		};
 		//手动执行定时任务
-		await this.app.runSchedule('testSchedule');
+		// await this.app.runSchedule('testSchedule');
 
 		await this.ctx.render('upload.tpl',dataList);
 	}
@@ -24,7 +25,8 @@ class UploadController extends Controller{
 		//数据
 		const dataList = {
 			list : [
-			]
+			],
+			projectRunName:this.config.projectRunName,
 		};
 		//let uploadBasePath=path.resolve(__dirname,'../../upload/');
 		console.log('---this.config.uploadBasePath---'+this.config.uploadBasePath);

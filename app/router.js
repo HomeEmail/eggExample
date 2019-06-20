@@ -5,8 +5,8 @@ module.exports = app => {
 	router.get(projectRunName+'/',controller.home.index);
 	// router.get(projectRunName+'/news',controller.news.list);
 
-	// router.get(projectRunName+'/upload',controller.upload.index);
-	// router.post(projectRunName+'/upload',controller.upload.up);
+	router.get(projectRunName+'/upload',controller.upload.index);
+	router.post(projectRunName+'/upload',controller.upload.up);
 
 	// router.get(projectRunName+'/captcha',controller.captcha.index);
 
