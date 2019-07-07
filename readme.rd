@@ -62,8 +62,12 @@ exports.logger = {
 找到node-gyp.js路径
 配置路径，比如：set npm_config_node_gyp=C:\Program Files\nodejs\node_modules\npm\node_modules\node-gyp\lib\node-gyp.js
 
-yarn 安装依赖不了，加上 --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/dist
+依赖安装不了，使用nrm切换依赖源，
+百度nrm怎么用就行
 
 颜色操作库：
 https://vis4.net/chromajs/#color-temperature
 
+提取图片主题颜色库：
+get-image-colors //目前采用这个
+thmclrx //这个安装不上，报node-gyp错误,放弃采用

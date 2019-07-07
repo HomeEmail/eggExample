@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "await-stream-ready": "^1.0.1",
+    "crypto-js": "^3.1.9-1",
     "egg": "^2.11.2",
     "egg-mysql": "^3.0.0",
     "egg-redis": "^2.0.0",
@@ -40,7 +41,6 @@
     "mz": "^2.7.0",
     "stream-wormhole": "^1.1.0",
     "svg-captcha": "^1.3.12",
-    "thmclrx": "^1.0.0",
     "uuid": "^3.3.2",
     "xml2js": "^0.4.19",
     "zlib": "^1.0.5"

@@ -21,9 +21,11 @@ var path = require('path');
 var common =require('./common');
 
 console.log('sha1:'+common.sha1('123456'));
+console.log('sha1ByCryptoJS:'+common.sha1ByCryptoJS('123456'));
 console.log('sha256:'+common.sha256('123456'));
 console.log('sha512:'+common.sha512('123456'));
 console.log('md5:'+common.md5('123456'));
+console.log('md5ByCryptoJS:'+common.md5ByCryptoJS('123456'));
 console.log('sha1_b64:'+common.sha1_b64('123456'));
 
 console.log('uuidv1:'+common.uuidv1());
@@ -62,7 +64,17 @@ console.log('encryptStr:'+encryptStr);
 var decryptStr=common.decrypt(encryptStr);
 console.log('decryptStr:'+decryptStr);
 
+//CryptoJS 加解密
+var encryptStr1=common.encryptByKey('sdf2233d$dsf||33||username');
+console.log('encryptStr1:'+encryptStr1);
+var decryptStr1=common.decryptByKey(encryptStr1);
+console.log('decryptStr1:'+decryptStr1);
 
+//CryptoJS 加解密 带iv
+var encryptStr2=common.encryptByKeyIv('sdf2233d$dsf||33||username');
+console.log('encryptStr2:'+encryptStr2);
+var decryptStr2=common.decryptByKeyIv(encryptStr2);
+console.log('decryptStr2:'+decryptStr2);
 
 
 

@@ -6,22 +6,50 @@ var uuidv5 = require('uuid/v5');//base namespace
 var fs = require('fs');
 var Hashids = require('hashids');//加密解密 (短字符串)
 var crypto = require('crypto');//nodejs 自带的加解密库
-
+var CryptoJS = require('crypto-js');//标准的加解密库，和java通信的加解密用这个比较实用
 
 module.exports = {
+    encryptByKey:function(s,key='1234123412ABCDEF'){
+        var ciphertext = CryptoJS.AES.encrypt(s, key).toString();
+        return ciphertext;
+    },
+    decryptByKey:function(s,key='1234123412ABCDEF'){
+        var bytes  = CryptoJS.AES.decrypt(s, key);
+        var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        return originalText;
+    },
+    encryptByKeyIv:function(s,key='1234123412ABCDEF',iv='ABCDEF1234123412'){
+        const k = CryptoJS.enc.Utf8.parse(key); //十六位十六进制数作为秘钥
+        const i = CryptoJS.enc.Utf8.parse(iv); //十六位十六进制数作为秘钥偏移量
+        let srcs = CryptoJS.enc.Utf8.parse(s);
+        let encrypted = CryptoJS.AES.encrypt(srcs, k, { iv: i, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+        return encrypted.ciphertext.toString().toUpperCase();
+    },
+    decryptByKeyIv:function(s,key='1234123412ABCDEF',iv='ABCDEF1234123412'){
+        const k = CryptoJS.enc.Utf8.parse(key); //十六位十六进制数作为秘钥
+        const i = CryptoJS.enc.Utf8.parse(iv); //十六位十六进制数作为秘钥偏移量
+        let encryptedHexStr = CryptoJS.enc.Hex.parse(s);
+        let srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+        let decrypt = CryptoJS.AES.decrypt(srcs, k, { iv: i, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+        let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+        return decryptedStr.toString();
+    },
     encrypt:function(s){//加密
-        var key='xssd&s@$aa.ddWd';//你的密钥
+        var key='1234123412ABCDEF';//你的密钥
         var cipher = crypto.createCipher('aes-256-cbc',key);
         var crypted = cipher.update(s,'utf8','hex');
         crypted += cipher.final('hex');
         return crypted;
     },
     decrypt:function(s){//解密
-        var key='xssd&s@$aa.ddWd';//你的密钥
+        var key='1234123412ABCDEF';//你的密钥
         var decipher = crypto.createDecipher('aes-256-cbc',key)
         var dec = decipher.update(s,'hex','utf8');
         dec += decipher.final('utf8');
         return dec;
+    },
+    sha1ByCryptoJS:function(s){ //结果和sha1一样
+        return CryptoJS.SHA1(s).toString();
     },
     sha1:function(s){
         return new Hashes.SHA1().hex(s);
@@ -34,6 +62,9 @@ module.exports = {
     },
     sha512:function(s){
         return new Hashes.SHA512().hex(s);
+    },
+    md5ByCryptoJS:function(s){ //结果和md5一样
+        return CryptoJS.MD5(s).toString();
     },
     md5:function(s){
         return new Hashes.MD5().hex(s);
