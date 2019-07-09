@@ -1,12 +1,12 @@
 module.exports = app => {
 	const {router,controller,config} = app;
 	
-  let projectRunName=!!config.projectRunName?'/'+config.projectRunName:'';
-	router.get(projectRunName+'/',controller.home.index);
+  // let projectRunName=!!config.projectRunName?'/'+config.projectRunName:'';
+	// router.get(projectRunName+'/',controller.home.index);
 	// router.get(projectRunName+'/news',controller.news.list);
 
-	router.get(projectRunName+'/upload',controller.upload.index);
-	router.post(projectRunName+'/upload',controller.upload.up);
+	// router.get(projectRunName+'/upload',controller.upload.index);
+	// router.post(projectRunName+'/upload',controller.upload.up);
 
 	// router.get(projectRunName+'/captcha',controller.captcha.index);
 
