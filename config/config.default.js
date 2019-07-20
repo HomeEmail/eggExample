@@ -139,8 +139,8 @@ module.exports = appInfo => {
 			threshold:512, // 小于 0.5k 的响应体不压缩
 		},
 		auth : {
-			enable:false,//是否启用
-			noneedLoginUrls:[],
+			enable:true,//是否启用
+			noneedLoginUrls:['/api/login','/api/logout','/api/captcha','/api/loginKey'],
 			//noneedLoginUrls : ['/','/login','/logout','/captcha','/system/verificationCode/getCode.utvgo','/system/user/login.utvgo'],
 		},
 

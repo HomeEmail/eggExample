@@ -22,6 +22,6 @@ module.exports = app => {
 	// router.get(projectRunName+'/user/del',controller.user.del);
 
 	//这里可以引入其他路由集合
-	require('./router/image_tool/router')(app);
+	require('./router/imageTool/router')(app);
 
 };

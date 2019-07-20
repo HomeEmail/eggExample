@@ -41,33 +41,36 @@ class UserController extends Controller {
             this.failure('验证码错误！');
             return 0;
         }
+        const k = ctx.session.loginKey;
+        if(!!!k){
+            this.failure('无密码加密key');
+            return 0;
+        }
+        const pwd = common.decryptByKey(param.passwd,k);//解密
+        ctx.session.loginKey = null;
+        delete ctx.session.loginKey;
 
-        let result = await ctx.service.panda.user.getOneByName(param.loginName);//有数据时返回是个对象，查不到数据时返回是个空数组
-        //console.log('service.panda.user.getOneByName:',result);
+        let result = await ctx.service.imageTool.user.getOneByName(param.loginName);//有数据时返回是个对象，查不到数据时返回是个空数组
+        //console.log('service.imageTool.user.getOneByName:',result);
 
-        if (!!!result.loginName) {//无此用户
+        if (!!!result.username) {//无此用户
             this.failure('无此用户!');
             return 0;
         }
         //有此用户
 
-        if (result.passwd != common.md5(param.passwd)) {//密码错误
+        if (result.password != common.sha1(pwd)) {//密码错误
             this.failure('密码错误！');
             return 0;
         }
-
-        let sysRoleList = await ctx.service.panda.user.getAuthority(result.pkId);//获取此用户的角色权限列表
-
-
         let data = Object.assign(
             {
                 verificationCode: ctx.session.captcha,
                 token: common.uuidv1(),
-                sysRoleList: sysRoleList,
             },
             result
         );
-        ctx.session.userinfo = { loginName: data.loginName, token: data.token }; //只保存必要的信息，太多信息的话如果不采用外部存储session就会丢失部分session信息
+        ctx.session.userinfo = { userId: data.id, username: data.username, token: data.token }; //只保存必要的信息，太多信息的话如果不采用外部存储session就会丢失部分session信息
 
         this.success({ data: data });
     }

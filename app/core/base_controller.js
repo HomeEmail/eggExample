@@ -20,7 +20,7 @@ class BaseController extends Controller {
 
   success(data) { //成功返回，正常
     this.ctx.body = {
-      code: '1',
+      code: 1,
       message:'success',
       ...data, //扩展符（对象和数组）对象的话相当于：Object.assign({}, bar);
     };
@@ -28,7 +28,7 @@ class BaseController extends Controller {
 
   failure(msg,data){ //失败返回，异常
       this.ctx.body = {
-        code:'0',
+        code:0,
         message:msg||'error',
         ...data,
       };

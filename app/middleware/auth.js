@@ -13,7 +13,7 @@ module.exports = (options,app) => {
 
         let projectRunName=!!ctx.app.config.projectRunName?'/'+ctx.app.config.projectRunName:'';
 
-        //let Authorization = ctx.request.headers['Authorization'];//获取自己定义的token验证,登陆时生成token；这里获取到的值是 'Bearer ' + token;
+        //let Authorization = ctx.request.headers['Authorization'];//获取自己定义的token验证,登陆时生成token；;
 
         if(ctx.session.userinfo){
             //如果需要验证自己定义的token在这里验证下

@@ -65,15 +65,17 @@ var decryptStr=common.decrypt(encryptStr);
 console.log('decryptStr:'+decryptStr);
 
 //CryptoJS 加解密
-var encryptStr1=common.encryptByKey('sdf2233d$dsf||33||username');
+var encryptStr1=common.encryptByKey('sdf2233d$dsf||33||username','9264e500-a560-11e9-9814-8d5334734b4e');
 console.log('encryptStr1:'+encryptStr1);
-var decryptStr1=common.decryptByKey(encryptStr1);
+var decryptStr1=common.decryptByKey(encryptStr1,'9264e500-a560-11e9-9814-8d5334734b4e');
 console.log('decryptStr1:'+decryptStr1);
+var decryptStr11=common.decryptByKey('U2FsdGVkX18yI7NRyY7l4fr7QtgXyowy/uW1E2dgunpB3hd14M28gROjJXvcSBi9');
+console.log('decryptStr11:'+decryptStr11);
 
 //CryptoJS 加解密 带iv
-var encryptStr2=common.encryptByKeyIv('sdf2233d$dsf||33||username');
+var encryptStr2=common.encryptByKeyIv('sdf2233d$dsf||33||username','9264e500-a560-11e9-9814-8d5334734b4e',333);
 console.log('encryptStr2:'+encryptStr2);
-var decryptStr2=common.decryptByKeyIv(encryptStr2);
+var decryptStr2=common.decryptByKeyIv(encryptStr2, '9264e500-a560-11e9-9814-8d53347234b4e', 3233);
 console.log('decryptStr2:'+decryptStr2);
 
 
