@@ -7,8 +7,11 @@ module.exports = app => {
   router.get(projectRunName+'/api/captcha',controller.captcha.index);
   router.get(projectRunName+'/api/loginKey',controller.loginKey.index);
 
-  // router.get(projectRunName+'/api/upload',controller.imageTool.upload.index);
-	router.post(projectRunName+'/api/upload',controller.imageTool.upload.up);
+  router.post(projectRunName+'/api/upload',controller.imageTool.upload.up);
+  
+  router.get(projectRunName+'/api/getUserImages',controller.imageTool.images.getUserImages);
+  router.get(projectRunName+'/api/getImageColors',controller.imageTool.images.getImageColors);
+  router.get(projectRunName+'/api/getImagesByColor',controller.imageTool.images.getImagesByColor);
   
   router.post(projectRunName+'/api/login',controller.imageTool.user.login);
   router.post(projectRunName+'/api/logout',controller.imageTool.user.logout);// /system/user/logout.utvgo

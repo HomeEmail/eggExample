@@ -20,6 +20,7 @@ class UploadController extends Controller{
 		
 		//数据
 		let returnPath = '';//返回上传的路径后缀
+		let insertImageId = 0;//上传成功后图片id
 		//let uploadBasePath=path.resolve(__dirname,'../../upload/');
 		//console.log('---this.config.uploadBasePath---'+this.config.uploadBasePath);
 		let uploadBasePath=this.config.uploadBasePath;
@@ -87,7 +88,7 @@ class UploadController extends Controller{
 								name:filename,
 								path:returnPath,
 							};
-							let insertImageId = await ctx.service.imageTool.images.insertImagesRecord(insertImageParam);
+							insertImageId = await ctx.service.imageTool.images.insertImagesRecord(insertImageParam);
 							if(!!insertImageId){
 								let colors = await ctx.service.imageTool.image.getColor(toPathName);
 								console.log('upload img colors:',colors);
@@ -115,7 +116,7 @@ class UploadController extends Controller{
 				}
 			}
 			
-			this.success({data:returnPath});
+			this.success({data:returnPath, id:insertImageId});
 
 		}catch(err){
 			this.failure('上传报错：'+err.message);
