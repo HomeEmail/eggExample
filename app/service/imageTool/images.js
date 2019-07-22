@@ -92,7 +92,7 @@ class ImagesService extends Service {
 
       //SELECT images.* FROM image_colors LEFT JOIN images ON images.id = image_colors.images_id WHERE image_colors.h<50 AND image_colors.h>10 AND image_colors.s<0.711 AND image_colors.s>0.502 AND image_colors.v<0.855 AND image_colors.v>0.711 AND image_colors.weights<=5;
 
-      let sql = 'SELECT images.* FROM image_colors LEFT JOIN images ON images.id = image_colors.images_id WHERE image_colors.h<? AND image_colors.h>? AND image_colors.s<? AND image_colors.s>? AND image_colors.v<? AND image_colors.v>? AND image_colors.weights<=?;';
+      let sql = 'SELECT images.* FROM image_colors LEFT JOIN images ON images.id = image_colors.images_id WHERE image_colors.h<? AND image_colors.h>? AND image_colors.s<? AND image_colors.s>? AND image_colors.v<? AND image_colors.v>? AND image_colors.weights<=? GROUP BY images.id;';
       let paramAry = [ht,hb,st,sb,vt,vb,obj.weights];
       console.log('getImagesByColor sql:',sql);
       const result = await mysqlClient.query(sql,paramAry);
