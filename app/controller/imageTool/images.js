@@ -148,6 +148,8 @@ class ImagesController extends Controller {
             this.failure('参数有误！');
             return 0;
         }
+        let user_id=ctx.session.userinfo.userId;
+        param.user_id=user_id;
         let result = await ctx.service.imageTool.images.getImagesByColor(param);
         //console.log('getImagesByColor:',result);
 
@@ -158,6 +160,39 @@ class ImagesController extends Controller {
             pageSize:result.lenght,
             totalPage:1
         });
+    }
+    async updateImageAlbum(){
+        const ctx = this.ctx;
+        //获取post过来的参数
+        let param = ctx.request.body;
+        //创建参数校验规则
+        let createRule = {
+            id: {
+                type: 'int',
+                required: true,//默认就是true
+                convertType:'int',
+            },
+            album_id: {
+                type: 'int',
+                required: true,//默认就是true
+                convertType:'int',
+            },
+        };
+        // 校验 `ctx.request.body` 是否符合我们预期的格式
+        // 如果参数校验未通过，将会抛出一个 status = 422 的异常
+        try {
+            ctx.validate(createRule, param);
+        } catch (err) {
+            ctx.logger.warn(err.message);
+            this.failure('参数有误！');
+            return 0;
+        }
+        const updateResult = await ctx.service.imageTool.images.updateImageAlbum(param.id, param.album_id);
+        if(!!updateResult){
+            this.success({ data: {} });
+        } else {
+            this.failure('更新图片所属相册失败！');
+        }
     }
 
 }
