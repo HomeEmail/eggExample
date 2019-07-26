@@ -8,7 +8,7 @@
     "dev": "egg-bin dev --port 7001",
     "test": "egg-bin test",
     "cov": "egg-bin cov",
-    "start": "egg-scripts start --port=80 --daemon",
+    "start": "egg-scripts start --port=8080 --daemon",
     "stop": "egg-scripts stop",
     "test1": "echo \"Error: no test specified\" && exit 1"
   },
